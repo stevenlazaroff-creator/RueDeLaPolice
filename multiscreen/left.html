@@ -5,18 +5,22 @@
 <title>Caserne 10 — LEFT SCREEN</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<style>
+  .slide.stage-hidden { opacity: 0 !important; transition: opacity 2s ease; }
+  .slide.stage-hidden.revealed { opacity: 1 !important; }
+</style>
 </head>
 <body>
 
-<!-- SLIDE 0: TITLE -->
-<div class="slide active vertical-center">
+<!-- SLIDE 0: TITLE — hidden until stage 1 -->
+<div class="slide active stage-hidden vertical-center">
   <div class="img-container">
     <img src="../images/RueDeLaPolice1.jpg" alt="Rue de la Police street sign">
     <p class="caption">Rue de la Police — a back lane with a name</p>
   </div>
 </div>
 
-<!-- SLIDE 1: THE STREET -->
+<!-- SLIDE 1 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/PoliceLane_1880.png" alt="Police Lane, 1880">
@@ -24,7 +28,7 @@
   </div>
 </div>
 
-<!-- SLIDE 2: TOPONYMY -->
+<!-- SLIDE 2 -->
 <div class="slide">
   <div class="panel-document" style="margin:auto; max-width:90%;">
     <p class="source-label">Ville de Montréal — Toponymie</p>
@@ -35,15 +39,15 @@
   </div>
 </div>
 
-<!-- SLIDE 3: FIRST CASERNE -->
+<!-- SLIDE 3 -->
 <div class="slide">
   <div class="img-container">
-    <img src="../images/map_1881.png" alt="1881 atlas showing Caserne 10">
-    <p class="caption">Hopkins Atlas, 1879–1881 — earliest cartographic documentation of Caserne 10 after its 1875 construction</p>
+    <img src="../images/map_1881.png" alt="1881 atlas">
+    <p class="caption">Hopkins Atlas, 1879–1881 — earliest cartographic documentation of Caserne 10</p>
   </div>
 </div>
 
-<!-- SLIDE 4: NEIGHBOURHOOD -->
+<!-- SLIDE 4 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/No10Station_1890.png" alt="No. 10 Station, Goad Atlas 1890">
@@ -51,7 +55,7 @@
   </div>
 </div>
 
-<!-- SLIDE 5: GREY NUNS -->
+<!-- SLIDE 5 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/Grey%20Nuns%20grey%20pic.jpg" alt="Grey Nuns Motherhouse exterior">
@@ -59,30 +63,30 @@
   </div>
 </div>
 
-<!-- SLIDE 6: FIRE BREAKS OUT -->
+<!-- SLIDE 6 -->
 <div class="slide">
   <div class="img-container">
-    <img src="../images/GreyNunsFire1.jpg" alt="Postcard of the Motherhouse on fire, 1918">
+    <img src="../images/GreyNunsFire1.jpg" alt="Motherhouse on fire, 1918">
     <p class="caption">Postcard of the Motherhouse on fire in 1918. Courtesy BAnQ.</p>
   </div>
 </div>
 
-<!-- SLIDE 7: THE RESPONSE -->
+<!-- SLIDE 7 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/Appareil_incendie_1926.jpg" alt="1926 fire apparatus">
-    <p class="caption">Montreal fire apparatus, c. 1926 — Archives de Montréal, ref. Z-419. Similar equipment to what responded to the Grey Nuns fire.</p>
+    <p class="caption">Montreal fire apparatus, c. 1926 — Archives de Montréal, ref. Z-419.</p>
   </div>
 </div>
 
-<!-- SLIDE 8: AFTERMATH -->
+<!-- SLIDE 8 -->
 <div class="slide vertical-center">
   <div class="img-container">
-    <img src="../images/Headline%2015%20feb%20fire%20La%20Patrie.png" alt="La Patrie headline, February 15, 1918">
+    <img src="../images/Headline%2015%20feb%20fire%20La%20Patrie.png" alt="La Patrie, Feb 15, 1918">
   </div>
 </div>
 
-<!-- SLIDE 9: ARSON -->
+<!-- SLIDE 9 -->
 <div class="slide panel-dark vertical-center">
   <div class="img-container" style="max-width:80%; margin:0 auto;">
     <img src="../images/GreyNunsFire2.jpg" alt="Grey Nuns fire, 1918">
@@ -90,63 +94,32 @@
   </div>
 </div>
 
-<!-- SLIDE 10: NEW STATION -->
+<!-- SLIDE 10 -->
 <div class="slide">
   <div class="img-container">
-    <img src="../images/Caserne_10_Facade.png" alt="Caserne 10 facade, 1931 building">
-    <p class="caption">Caserne 10, 1445 rue Saint-Mathieu — designed by Harold E. Shorey & S. Douglass Ritchie, 1931. Winner of the RAIC award.</p>
+    <img src="../images/Caserne_10_Facade.png" alt="Caserne 10 facade, 1931">
+    <p class="caption">Caserne 10, 1445 rue Saint-Mathieu — Shorey & Ritchie, 1931.</p>
   </div>
 </div>
 
-<!-- SLIDE 11: WHAT A STREET NAME REMEMBERS -->
+<!-- SLIDE 11 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/map_1880.png" alt="1880 map">
-    <p class="caption">1880 — the neighbourhood around Caserne 10, five years after construction</p>
+    <p class="caption">1880 — the neighbourhood around Caserne 10</p>
   </div>
 </div>
 
-<!-- SLIDE 12: SOURCES -->
+<!-- SLIDE 12 -->
 <div class="slide" style="justify-content:flex-start; padding-top:5vh;">
   <p class="source-label" style="margin-bottom:2vh;">Primary Sources — Newspapers</p>
   <p class="body-text" style="font-size:2vh; line-height:2.2;">Le Devoir, 15 février 1918<br>Le Canada, 15 février 1918<br>Le Canada, 16 février 1918<br>La Patrie, 15 février 1918<br>La Patrie, 18 février 1918<br>La Patrie (hebdomadaire), 21 février 1918<br>Montreal Weekly Witness, 19 February 1918<br>L'Étoile du Nord, 21 février 1918<br>Montreal Gazette, [fragment]</p>
   <p class="source-label" style="margin-top:3vh; margin-bottom:2vh;">Primary Sources — Cartographic</p>
-  <p class="body-text" style="font-size:2vh; line-height:2.2;">Hopkins Atlas, 1879 — BAnQ ark:/52327/2246931<br>Goad Atlas, 1890 — BAnQ ark:/52327/2244212<br>Goad Atlas, 1912–14 — BAnQ ark:/52327/2246836</p>
+  <p class="body-text" style="font-size:2vh; line-height:2.2;">Hopkins Atlas, 1879<br>Goad Atlas, 1890<br>Goad Atlas, 1912–14</p>
 </div>
 
 <div id="slide-counter"></div>
-
-<script>
-const slides = document.querySelectorAll('.slide');
-const counter = document.getElementById('slide-counter');
-let current = 0;
-const channel = new BroadcastChannel('caserne10-sync');
-
-function goTo(index) {
-  if (index < 0 || index >= slides.length) return;
-  slides[current].classList.remove('active');
-  slides[current].querySelectorAll('.fade-up').forEach(el => {
-    el.style.animation = 'none'; el.offsetHeight; el.style.animation = '';
-  });
-  current = index;
-  slides[current].classList.add('active');
-  counter.textContent = (current + 1) + ' / ' + slides.length;
-}
-
-channel.onmessage = (e) => { if (e.data.type === 'goto') goTo(e.data.index); };
-
-document.addEventListener('keydown', (e) => {
-  let next = current;
-  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next = current + 1; }
-  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); next = current - 1; }
-  else if (e.key === 'Home') { next = 0; }
-  else if (e.key === 'End') { next = slides.length - 1; }
-  else return;
-  goTo(next);
-  channel.postMessage({ type: 'goto', index: next });
-});
-
-goTo(0);
-</script>
+<script src="sounds.js"></script>
+<script src="sync.js"></script>
 </body>
 </html>

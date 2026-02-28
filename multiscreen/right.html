@@ -5,18 +5,22 @@
 <title>Caserne 10 — RIGHT SCREEN</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<style>
+  .slide.stage-hidden { opacity: 0 !important; transition: opacity 2s ease; }
+  .slide.stage-hidden.revealed { opacity: 1 !important; }
+</style>
 </head>
 <body>
 
-<!-- SLIDE 0: TITLE -->
-<div class="slide active vertical-center">
+<!-- SLIDE 0: TITLE — hidden until stage 2 -->
+<div class="slide active stage-hidden vertical-center">
   <div class="img-container">
     <img src="../images/GreyNunsFire1.jpg" alt="Grey Nuns Fire, 1918">
     <p class="caption">The Grey Nuns Motherhouse fire — February 14, 1918</p>
   </div>
 </div>
 
-<!-- SLIDE 1: THE STREET -->
+<!-- SLIDE 1 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/RueDeLaPolice2.jpg" alt="Rue de la Police">
@@ -24,23 +28,23 @@
   </div>
 </div>
 
-<!-- SLIDE 2: TOPONYMY -->
+<!-- SLIDE 2 -->
 <div class="slide">
   <div class="img-container">
-    <img src="../images/Maurice_Perreault.png" alt="Henri-Maurice Perrault, architect">
+    <img src="../images/Maurice_Perreault.png" alt="Henri-Maurice Perrault">
     <p class="caption">Henri-Maurice Perrault (1828–1903) — architect of the original Caserne 10, 1875</p>
   </div>
 </div>
 
-<!-- SLIDE 3: FIRST CASERNE -->
+<!-- SLIDE 3 -->
 <div class="slide">
   <div class="img-container">
-    <img src="../images/Caserne10.jpg" alt="Caserne 10, corner Guy and St Catherine, circa 1909">
+    <img src="../images/Caserne10.jpg" alt="Caserne 10, circa 1909">
     <p class="caption">Caserne 10, next to the Bank of Toronto, corner Guy and St Catherine, Circa 1909, Bibliothèque nationale (site Rosemont)</p>
   </div>
 </div>
 
-<!-- SLIDE 4: NEIGHBOURHOOD -->
+<!-- SLIDE 4 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/Insurance%20plan%20of%20city%20of%20Montreal,%20Quebec,%20Canada,%20volume%20II.png" alt="Insurance plan of Montreal, 1915">
@@ -48,7 +52,7 @@
   </div>
 </div>
 
-<!-- SLIDE 5: GREY NUNS -->
+<!-- SLIDE 5 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/Grey%20Nuns%20grey%20pic2.jpg" alt="Grey Nuns Motherhouse, Guy Street entrance">
@@ -56,7 +60,7 @@
   </div>
 </div>
 
-<!-- SLIDE 6: FIRE BREAKS OUT -->
+<!-- SLIDE 6 -->
 <div class="slide" style="justify-content:center; padding: 5vh 4vw;">
   <p class="source-label fade-up">The Alarm Sequence — Le Canada, Feb. 15, 1918</p>
   <div class="alarm-box fade-up fade-up-d1">
@@ -77,22 +81,22 @@
   </div>
 </div>
 
-<!-- SLIDE 7: THE RESPONSE -->
+<!-- SLIDE 7 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/Camion_a_boyaux_1926.jpg" alt="Hose wagon, 1926">
-    <p class="caption">Hose wagon, c. 1926 — Archives de Montréal, ref. Z-441. Water pressure during the Grey Nuns fire was weak; steam pumps had to be set up at considerable distance.</p>
+    <p class="caption">Hose wagon, c. 1926 — Archives de Montréal, ref. Z-441.</p>
   </div>
 </div>
 
-<!-- SLIDE 8: AFTERMATH -->
+<!-- SLIDE 8 -->
 <div class="slide vertical-center">
   <div class="img-container">
-    <img src="../images/Headline%2016%20feb%20fire%20La%20Patrie.png" alt="La Patrie headline, February 16, 1918">
+    <img src="../images/Headline%2016%20feb%20fire%20La%20Patrie.png" alt="La Patrie, Feb 16, 1918">
   </div>
 </div>
 
-<!-- SLIDE 9: ARSON -->
+<!-- SLIDE 9 -->
 <div class="slide panel-dark vertical-center">
   <div class="img-container" style="max-width:80%; margin:0 auto;">
     <img src="../images/GreyNunsFire3.jpg" alt="Grey Nuns fire aftermath, 1918">
@@ -100,15 +104,15 @@
   </div>
 </div>
 
-<!-- SLIDE 10: NEW STATION -->
+<!-- SLIDE 10 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/Caserne_10_modern_interior.png" alt="Modern interior of Caserne 10">
-    <p class="caption">Interior, Caserne 10 — still operational. The memorial plaque honouring fallen firefighters connects both buildings in institutional memory.</p>
+    <p class="caption">Interior, Caserne 10 — still operational.</p>
   </div>
 </div>
 
-<!-- SLIDE 11: WHAT A STREET NAME REMEMBERS -->
+<!-- SLIDE 11 -->
 <div class="slide">
   <div class="img-container">
     <img src="../images/Caserne_10_plaque.png" alt="Memorial plaque">
@@ -116,7 +120,7 @@
   </div>
 </div>
 
-<!-- SLIDE 12: SOURCES -->
+<!-- SLIDE 12 -->
 <div class="slide" style="justify-content:flex-start; padding-top:5vh;">
   <p class="source-label" style="margin-bottom:2vh;">Secondary Sources</p>
   <p class="body-text" style="font-size:2vh; line-height:2.2;">Osborne, Brian S. "Montreal's Fire Stations." JSSAC 35, no. 2 (2010): 21–46.<br><br>Redfern, Bruce D. "Montreal Fire Department, 1765–2005." MA thesis, Concordia University, 2006.<br><br>McRobie, William Orme. Fighting the Flames! Montreal: "Witness" Printing House, 1881.<br><br>Ville de Montréal. "Rue de la Police." Toponymie de Montréal.</p>
@@ -125,38 +129,7 @@
 </div>
 
 <div id="slide-counter"></div>
-
-<script>
-const slides = document.querySelectorAll('.slide');
-const counter = document.getElementById('slide-counter');
-let current = 0;
-const channel = new BroadcastChannel('caserne10-sync');
-
-function goTo(index) {
-  if (index < 0 || index >= slides.length) return;
-  slides[current].classList.remove('active');
-  slides[current].querySelectorAll('.fade-up').forEach(el => {
-    el.style.animation = 'none'; el.offsetHeight; el.style.animation = '';
-  });
-  current = index;
-  slides[current].classList.add('active');
-  counter.textContent = (current + 1) + ' / ' + slides.length;
-}
-
-channel.onmessage = (e) => { if (e.data.type === 'goto') goTo(e.data.index); };
-
-document.addEventListener('keydown', (e) => {
-  let next = current;
-  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next = current + 1; }
-  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); next = current - 1; }
-  else if (e.key === 'Home') { next = 0; }
-  else if (e.key === 'End') { next = slides.length - 1; }
-  else return;
-  goTo(next);
-  channel.postMessage({ type: 'goto', index: next });
-});
-
-goTo(0);
-</script>
+<script src="sounds.js"></script>
+<script src="sync.js"></script>
 </body>
 </html>
