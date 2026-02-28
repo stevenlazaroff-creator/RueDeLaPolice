@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caserne 10 — From a Street Name to a Catastrophe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-panel: #0f0f0f;
+    --text: #e0d8cc;
+    --text-dim: #8a8278;
+    --accent: #c9a94e;
+    --accent-dim: #8a7535;
+    --red: #8b3a3a;
+    --border: #1a1815;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --sans: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+  }
+
+  /* ─── SLIDE CONTAINER ─── */
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s ease;
+  }
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ─── PANELS ─── */
+  .panel {
+    height: 100vh;
+    padding: 3vh 2.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-left {
+    border-right: 1px solid var(--border);
+  }
+  .panel-right {
+    border-left: 1px solid var(--border);
+  }
+  .panel-center {
+    padding: 5vh 3vw;
+  }
+
+  /* ─── TYPOGRAPHY ─── */
+  .slide-title {
+    font-family: var(--serif);
+    font-size: 2.8vh;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2vh;
+  }
+  .main-heading {
+    font-family: var(--serif);
+    font-size: 5.5vh;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 3vh;
+    color: var(--text);
+  }
+  .main-heading em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .body-text {
+    font-family: var(--sans);
+    font-size: 2.4vh;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text);
+    max-width: 95%;
+  }
+  .body-text + .body-text {
+    margin-top: 2vh;
+  }
+  .caption {
+    font-family: var(--sans);
+    font-size: 1.6vh;
+    font-weight: 300;
+    color: var(--text-dim);
+    margin-top: 1.5vh;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+  .source-label {
+    font-family: var(--sans);
+    font-size: 1.4vh;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    margin-bottom: 1vh;
+  }
+  .quote {
+    font-family: var(--serif);
+    font-size: 3.2vh;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text);
+    border-left: 2px solid var(--accent-dim);
+    padding-left: 2vw;
+    margin: 2vh 0;
+  }
+  .highlight {
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .stat {
+    font-family: var(--serif);
+    font-size: 12vh;
+    font-weight: 300;
+    color: var(--red);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: var(--sans);
+    font-size: 2.4vh;
+    font-weight: 300;
+    color: var(--text-dim);
+    margin-top: 1vh;
+  }
+  .victim-name {
+    font-family: var(--serif);
+    font-size: 2.2vh;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 2;
+  }
+
+  /* ─── IMAGES ─── */
+  .img-container {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .img-container img {
+    width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border: 1px solid var(--border);
+  }
+  .img-container.fill img {
+    object-fit: cover;
+    max-height: 85vh;
+  }
+  .img-duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1vw;
+  }
+  .img-duo img {
+    width: 100%;
+    max-height: 40vh;
+    object-fit: contain;
+    border: 1px solid var(--border);
+  }
+
+  /* ─── SPECIAL LAYOUTS ─── */
+  .panel-dark {
+    background: #050505;
+  }
+  .panel-document {
+    background: #0d0c0a;
+    border: 1px solid var(--border);
+    padding: 4vh 2vw;
+  }
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--accent-dim);
+    margin: 2.5vh 0;
+  }
+  .vertical-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .alarm-box {
+    background: #121110;
+    border: 1px solid var(--accent-dim);
+    padding: 2.5vh 2vw;
+    margin: 1.5vh 0;
+    font-family: var(--sans);
+  }
+  .alarm-time {
+    font-family: var(--serif);
+    font-size: 4vh;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .alarm-desc {
+    font-size: 2vh;
+    color: var(--text-dim);
+    margin-top: 0.5vh;
+  }
+
+  /* ─── TITLE SLIDE SPECIAL ─── */
+  .title-slide .panel-center {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .title-main {
+    font-family: var(--serif);
+    font-size: 6vh;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+    margin-bottom: 3vh;
+  }
+  .title-sub {
+    font-family: var(--sans);
+    font-size: 2.2vh;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .title-rule {
+    width: 120px;
+    height: 1px;
+    background: var(--accent);
+    margin: 3vh auto;
+  }
+
+  /* ─── NAVIGATION ─── */
+  #nav {
+    position: fixed;
+    bottom: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.8vw;
+    z-index: 100;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+  }
+  #nav:hover { opacity: 1; }
+  .nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .nav-dot.active {
+    background: var(--accent);
+    transform: scale(1.4);
+  }
+
+  #slide-counter {
+    position: fixed;
+    bottom: 2vh;
+    right: 2vw;
+    font-family: var(--sans);
+    font-size: 1.4vh;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    z-index: 100;
+    opacity: 0.4;
+  }
+
+  /* ─── PRESENTER NOTES ─── */
+  #notes-overlay {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.92);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 1.8vh;
+    padding: 2vh 3vw;
+    z-index: 200;
+    border-top: 1px solid var(--accent-dim);
+    max-height: 25vh;
+    overflow-y: auto;
+    line-height: 1.6;
+  }
+  #notes-overlay.visible { display: block; }
+  #notes-label {
+    font-size: 1.2vh;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    margin-bottom: 1vh;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .slide.active .fade-up {
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .slide.active .fade-up-d1 { animation-delay: 0.2s; }
+  .slide.active .fade-up-d2 { animation-delay: 0.4s; }
+  .slide.active .fade-up-d3 { animation-delay: 0.6s; }
+  .slide.active .fade-up-d4 { animation-delay: 0.8s; }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ SLIDE 0: TITLE ═══════════════ -->
+<div class="slide title-slide active" data-notes="Welcome the audience. Introduce yourself and the course (HIST 306, Dr. Preston). Explain the three-screen format: left = maps and spatial evidence, center = narrative, right = primary sources and documents.">
+  <div class="panel panel-left vertical-center">
+    <div class="img-container">
+      <img src="images/lane_1880.png" alt="Rue de la Police, 1880 map">
+      <p class="caption">Rue de la Police — detail from 1880 atlas</p>
+    </div>
+  </div>
+  <div class="panel panel-center vertical-center">
+    <p class="slide-title fade-up">HIST 306 &middot; Montreal Public History</p>
+    <div class="title-rule fade-up fade-up-d1"></div>
+    <h1 class="title-main fade-up fade-up-d2">From a Street Name<br>to a Catastrophe</h1>
+    <div class="title-rule fade-up fade-up-d3"></div>
+    <p class="title-sub fade-up fade-up-d4">Caserne 10: A Fire Station and Its Neighbourhood, 1875–1931</p>
+    <br>
+    <p class="title-sub fade-up fade-up-d4" style="margin-top:3vh; color:var(--text-dim);">Steven Lazaroff &middot; February 2026</p>
+  </div>
+  <div class="panel panel-right vertical-center">
+    <div class="img-container">
+      <img src="images/Caserne_10_plaque.png" alt="Memorial plaque inside Caserne 10">
+      <p class="caption">Memorial plaque, Caserne 10 — 1876 to present</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 1: THE STREET ═══════════════ -->
+<div class="slide" data-notes="Tell the story naturally — your Monday walk. The curiosity. The question that wouldn't let go. Keep it personal and conversational.">
+  <div class="panel panel-left">
+    <div class="img-container">
+      <img src="images/map_1912.png" alt="1912 map of neighbourhood">
+      <p class="caption">Fire insurance atlas, 1912 — Sainte-Catherine at Guy Street. The lane behind the station is visible running north-south.</p>
+    </div>
+  </div>
+  <div class="panel panel-center">
+    <p class="slide-title fade-up">Part One</p>
+    <h2 class="main-heading fade-up fade-up-d1">Why does a back lane<br>have <em>a name?</em></h2>
+    <div class="divider fade-up fade-up-d2"></div>
+    <p class="body-text fade-up fade-up-d2">Every Monday this semester, I walk the same route. Out of the John Molson School of Business, south down Guy Street, towards Sainte-Catherine.</p>
+    <p class="body-text fade-up fade-up-d3">There's a moment on that walk where you cross a back lane. Unlike most back lanes in Montreal, this one has a proper street sign.</p>
+    <p class="body-text fade-up fade-up-d3">It reads: <span class="highlight">"Rue de la Police."</span></p>
+    <p class="body-text fade-up fade-up-d4">There is no police station anywhere near this lane. There hasn't been one in living memory. So why does a narrow service lane carry this name?</p>
+  </div>
+  <div class="panel panel-right">
+    <div class="img-container">
+      <img src="images/Old_address.png" alt="Old address location">
+      <p class="caption">The original Caserne 10 site on Sainte-Catherine Ouest — the lane ran behind this building</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 2: THE TOPONYMY DISCOVERY ═══════════════ -->
+<div class="slide" data-notes="The key discovery. Read the toponymy entry — translate it live for the audience if you want. Emphasize: the street is a fossil of a building that no longer exists.">
+  <div class="panel panel-left">
+    <div class="img-container">
+      <img src="images/Original_caserne_on_ste_catherine.jpg" alt="Original Caserne 10 on Sainte-Catherine">
+      <p class="caption">The original Caserne 10 — combined police and fire station, built 1875 by Henri-Maurice Perrault at 1625 Sainte-Catherine Ouest</p>
+    </div>
+  </div>
+  <div class="panel panel-center">
+    <p class="slide-title fade-up">Part Two</p>
+    <h2 class="main-heading fade-up fade-up-d1">The city gives <em>an answer</em></h2>
+    <div class="divider fade-up fade-up-d2"></div>
+    <p class="body-text fade-up fade-up-d2">The Ville de Montréal toponymy database records that <span class="highlight">"Rue de la Police"</span> was officially designated on <span class="highlight">April 10, 1876.</span></p>
+    <p class="body-text fade-up fade-up-d3">In 1875, architect Henri-Maurice Perrault built Station No. 10 — a combined police and fire station — and behind it, a narrow service lane was opened. That lane became Rue de la Police.</p>
+    <p class="body-text fade-up fade-up-d4">The station was demolished in 1931. The lane kept its name.</p>
+    <div class="divider fade-up fade-up-d4"></div>
+    <p class="body-text fade-up fade-up-d4" style="color:var(--text-dim); font-style:italic;">The name is a fossil — a trace of something that no longer exists, embedded in the geography of the city.</p>
+  </div>
+  <div class="panel panel-right">
+    <div class="panel-document" style="margin:auto; max-width:90%;">
+      <p class="source-label">Ville de Montréal — Toponymie</p>
+      <p class="body-text" style="font-size:2vh; margin-bottom:1.5vh;"><strong>Date de désignation:</strong> 10 avril 1876</p>
+      <p class="body-text" style="font-size:2vh;"><strong>Origine et signification:</strong></p>
+      <p class="body-text" style="font-size:1.8vh; color:var(--text-dim); font-style:italic; margin-top:1vh;">La Cité de Montréal forme son premier comité de police en 1840 et son Département du feu en 1863. Pour ces services, on construit des édifices particuliers, et avec les années, on prend l'habitude de loger sous un même toit le poste de police et la caserne de pompier. En 1875, l'architecte Henri-Maurice Perrault construit le poste no 10, derrière lequel on ouvre une étroite voie de service. Cette voie devient la rue de la Police et conserve cette dénomination après la démolition du poste, en 1931.</p>
+      <p class="caption" style="margin-top:2vh;">montreal.ca/toponymie/toponymes/rue-de-la-police</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 3: THE FIRST CASERNE 10 ═══════════════ -->
+<div class="slide" data-notes="Context: the 1863 professionalization, Chief Bertram, the transition from volunteer to paid. The 1852 Great Fire as the catalyst. Perrault's station as part of this new era.">
+  <div class="panel panel-left">
+    <div class="img-container">
+      <img src="images/map_1881.png" alt="1881 atlas showing Caserne 10">
+      <p class="caption">Hopkins Atlas, 1879–1881 — earliest cartographic documentation of Caserne 10 after its 1875 construction</p>
+    </div>
+  </div>
+  <div class="panel panel-center">
+    <p class="slide-title fade-up">Part Three</p>
+    <h2 class="main-heading fade-up fade-up-d1">The first <em>Caserne 10</em><br>1875–1931</h2>
+    <div class="divider fade-up fade-up-d2"></div>
+    <p class="body-text fade-up fade-up-d2">The Montreal Fire Department was formally established as a professional, paid service on <span class="highlight">May 1, 1863</span>, under Chief Alexander Bertram — Canada's first.</p>
+    <p class="body-text fade-up fade-up-d3">The catalyst was catastrophe. The Great Fire of 1852 left ten thousand people homeless and destroyed nearly half the city's housing. After that, the city professionalized: paid firefighters, steam engines, an alarm telegraph system, and purpose-built stations.</p>
+    <p class="body-text fade-up fade-up-d4">Caserne 10 was one of these stations. Built in 1875 by Perrault as a combined police and fire hall, it served through the era of horse-drawn apparatus, gas lighting, and wooden interiors.</p>
+  </div>
+  <div class="panel panel-right">
+    <div class="img-container">
+      <img src="images/Map_Chas_Goad_civil_engineer_1890.png" alt="Goad Atlas 1890">
+      <p class="caption">Charles E. Goad fire insurance atlas, 1890 — the neighbourhood fifteen years after the station's construction. Mixed residential and industrial, including the S.H. & J. Moss textile warehouse.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 4: NEIGHBOURHOOD EVOLVES ═══════════════ -->
+<div class="slide" data-notes="Use the maps to show change over time. Point to specific features: the densification, the commercial growth along Ste-Catherine, the increasing fire risk.">
+  <div class="panel panel-left">
+    <div class="img-container">
+      <img src="images/map_1905.png" alt="1905 map">
+      <p class="caption">Atlas, c. 1905 — commercial intensification along Sainte-Catherine begins to transform the neighbourhood</p>
+    </div>
+  </div>
+  <div class="panel panel-center">
+    <p class="slide-title fade-up">Part Four</p>
+    <h2 class="main-heading fade-up fade-up-d1">The neighbourhood<br><em>transforms</em></h2>
+    <div class="divider fade-up fade-up-d2"></div>
+    <p class="body-text fade-up fade-up-d2">Fire insurance atlases — the primary tool of this research — reveal the neighbourhood evolving around the station over four decades.</p>
+    <p class="body-text fade-up fade-up-d3">In 1890, the Goad Atlas shows a mixed fabric: residences alongside light industry and textile warehouses. By the 1912 edition, Sainte-Catherine had intensified dramatically — more commercial buildings, denser development, higher fire risk.</p>
+    <p class="body-text fade-up fade-up-d4">The station was increasingly surrounded by exactly the kind of urban fabric that needed it most. And one block south, on Guy Street, stood one of the largest institutional buildings in Montreal.</p>
+  </div>
+  <div class="panel panel-right">
+    <div class="img-container">
+      <img src="images/map_1912_v2.png" alt="1912 atlas">
+      <p class="caption">Goad Atlas, 1912–14 — heavy commercial corridor. Note the Grey Nuns Motherhouse complex one block south on Guy Street.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 5: THE GREY NUNS ═══════════════ -->
+<div class="slide" data-notes="Set the scene carefully. The audience needs to understand the scale of the building, who was inside, and the vulnerability of the infants. Slow down here.">
+  <div class="panel panel-left">
+    <div class="img-container">
+      <img src="images/Ste_Cunegonde.png" alt="View of the Grey Nuns area">
+      <p class="caption">The Grey Nuns Motherhouse and surrounding area — the crèche dormitory occupied the top floor of the west wing</p>
+    </div>
+  </div>
+  <div class="panel panel-center">
+    <p class="slide-title fade-up">Part Five</p>
+    <h2 class="main-heading fade-up fade-up-d1">One block away<br><em>the Grey Nuns</em></h2>
+    <div class="divider fade-up fade-up-d2"></div>
+    <p class="body-text fade-up fade-up-d2">Less than two blocks from Caserne 10 sat the Motherhouse of the Grey Nuns — one of the largest institutional complexes in Montreal.</p>
+    <p class="body-text fade-up fade-up-d3">By 1918, it housed several hundred nuns, elderly residents, a military convalescent hospital with nearly <span class="highlight">285 wounded soldiers</span> from the First World War — and on the top floor of the west wing, a crèche.</p>
+    <p class="body-text fade-up fade-up-d4">Roughly <span class="highlight">170 infants</span> slept there. Most were foundlings — abandoned children left on the convent doorstep. Some were only a few days old. None were older than about two and a half years.</p>
+  </div>
+  <div class="panel panel-right">
+    <div class="img-container">
+      <img src="images/Grey_Nun_fire_montreal_gazette.png" alt="Montreal Gazette coverage of the Grey Nuns fire">
+      <p class="caption">Coverage of the Grey Nuns fire — Montreal Gazette</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 6: THE FIRE BREAKS OUT ═══════════════ -->
+<div class="slide" data-notes="This is the dramatic turn. Read slowly. The alarm sequence gives the audience a sense of escalation — first alarm, second, third. 18 stations. Let the numbers land.">
+  <div class="panel panel-left">
+    <div class="img-container">
+      <img src="images/caserne_10.jpg" alt="Historical view of Caserne 10 area">
+      <p class="caption">Caserne 10 — the closest fire station to the Grey Nuns Motherhouse. The firefighters who responded came from this building.</p>
+    </div>
+  </div>
+  <div class="panel panel-center">
+    <p class="slide-title fade-up" style="color:var(--red);">Part Six</p>
+    <h2 class="main-heading fade-up fade-up-d1">Valentine's Day<br><em style="color:var(--red);">1918</em></h2>
+    <div class="divider fade-up fade-up-d2" style="background:var(--red);"></div>
+    <p class="body-text fade-up fade-up-d2">The fire broke out between seven-thirty and seven-fifty in the evening, on the top floor of the west wing. The babies had been put to bed hours earlier.</p>
+    <p class="body-text fade-up fade-up-d3">Flames caught a curtain near a window and spread through the wooden interior with terrifying speed. Smoke filtered down through the floorboards into the military hospital below.</p>
+    <p class="body-text fade-up fade-up-d4"><span class="highlight">Eighteen fire stations</span> ultimately responded. Caserne 10, barely a block away, was almost certainly the first.</p>
+  </div>
+  <div class="panel panel-right" style="justify-content:center; padding: 5vh 2vw;">
+    <p class="source-label fade-up">The Alarm Sequence — Le Canada, Feb. 15, 1918</p>
+    <div class="alarm-box fade-up fade-up-d1">
+      <p class="alarm-time">7:50 PM</p>
+      <p class="alarm-desc">Private alarm No. 419 sounds from the Grey Nuns</p>
+    </div>
+    <div class="alarm-box fade-up fade-up-d2">
+      <p class="alarm-time">7:51 PM</p>
+      <p class="alarm-desc">Second alarm — calls the second section of the brigade</p>
+    </div>
+    <div class="alarm-box fade-up fade-up-d3">
+      <p class="alarm-time">8:07 PM</p>
+      <p class="alarm-desc">Third alarm — calls the reserve. The entire brigade mobilized.</p>
+    </div>
+    <div class="alarm-box fade-up fade-up-d4" style="border-color:var(--red);">
+      <p class="alarm-time" style="color:var(--red);">10:30 PM</p>
+      <p class="alarm-desc">Firefighters report 38 small bodies recovered. The count will rise.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 7: THE RESPONSE ═══════════════ -->
+<div class="slide" data-notes="Sub-Chief Marin is the central figure. He carried four children at a time. He ordered the rescue stopped when the dormitory became unsurvivable. This is where the station's history becomes human.">
+  <div class="panel panel-left">
+    <div class="img-container">
+      <img src="images/Appareil_incendie_1926.jpg" alt="1926 fire apparatus">
+      <p class="caption">Montreal fire apparatus, c. 1926 — Archives de Montréal, ref. Z-419. Similar equipment to what responded to the Grey Nuns fire.</p>
+    </div>
+  </div>
+  <div class="panel panel-center">
+    <p class="slide-title fade-up" style="color:var(--red);">Part Seven</p>
+    <h2 class="main-heading fade-up fade-up-d1">Into <em style="color:var(--red);">the flames</em></h2>
+    <div class="divider fade-up fade-up-d2" style="background:var(--red);"></div>
+    <p class="body-text fade-up fade-up-d2"><span class="highlight">Sub-Chief Marin</span> — the district chief — was among the first firefighters on scene. He and his men pushed into the burning dormitory and seized children from their cribs, Marin carrying four at a time.</p>
+    <p class="body-text fade-up fade-up-d3">Nuns rushed in alongside them. Sister Côté made four separate trips, saving twelve babies on her first three trips, four more on her last. Two or three nuns collapsed from smoke inhalation and had to be carried out by firefighters.</p>
+    <p class="body-text fade-up fade-up-d4">Then a sudden gust of flame burst from the central tower. The dormitory became unsurvivable. Marin gave the order: <span style="color:var(--red);">no more rescue attempts.</span></p>
+    <p class="quote fade-up fade-up-d4" style="border-color:var(--red);">Le dortoir était comme une fournaise ardente.<br><span style="font-size:2vh; color:var(--text-dim);">The dormitory was a burning furnace. — La Patrie, Feb. 21, 1918</span></p>
+  </div>
+  <div class="panel panel-right">
+    <div class="img-container">
+      <img src="images/Camion_a_boyaux_1926.jpg" alt="Hose wagon, 1926">
+      <p class="caption">Hose wagon, c. 1926 — Archives de Montréal, ref. Z-441. Water pressure during the Grey Nuns fire was weak; steam pumps had to be set up at considerable distance.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 8: THE AFTERMATH ═══════════════ -->
+<div class="slide" data-notes="Slow down here. The number alone is devastating. If you read the victim names, read them slowly — these are real children. The audience needs time to absorb this.">
+  <div class="panel panel-left vertical-center">
+    <div class="img-container">
+      <img src="images/In_Memoriam_1.jpg" alt="In Memoriam">
+    </div>
+  </div>
+  <div class="panel panel-center vertical-center">
+    <p class="stat fade-up">53–60+</p>
+    <p class="stat-label fade-up fade-up-d1">infants confirmed dead</p>
+    <div class="divider fade-up fade-up-d2" style="margin:3vh auto; background:var(--red);"></div>
+    <p class="body-text fade-up fade-up-d3" style="text-align:center; max-width:80%; margin:0 auto;">Many remains were unrecognizable. Some infants may have been entirely consumed by the fire, their bodies never recovered.</p>
+    <div style="margin-top:3vh; columns:2; column-gap:2vw;">
+      <p class="victim-name fade-up fade-up-d4">Blanche Raymond, 6 months</p>
+      <p class="victim-name fade-up fade-up-d4">Albert Auclair, 15 months</p>
+      <p class="victim-name fade-up fade-up-d4">Irène Malo, 18 months</p>
+      <p class="victim-name fade-up fade-up-d4">Aurore Corbeil, 12 months</p>
+      <p class="victim-name fade-up fade-up-d4">Hector Rocher, 5 months</p>
+      <p class="victim-name fade-up fade-up-d4">Bernadette Mercier, 14 months</p>
+      <p class="victim-name fade-up fade-up-d4">Jean-Baptiste Chartier, 8 months</p>
+      <p class="victim-name fade-up fade-up-d4">Rosa Beauchamp, 18 months</p>
+    </div>
+    <p class="caption fade-up fade-up-d4" style="text-align:center; margin-top:2vh;">Among 24 identified victims — La Patrie, February 18, 1918</p>
+  </div>
+  <div class="panel panel-right vertical-center">
+    <div class="img-container">
+      <img src="images/In_Memoriam_2.jpg" alt="In Memoriam">
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 9: THE ARSON ═══════════════ -->
+<div class="slide" data-notes="PAUSE before you start this slide. Let the transition from the previous slide settle. This is the reveal that changes everything. Every 1918 newspaper said 'electrical short circuit.' The truth came later.">
+  <div class="panel panel-left panel-dark vertical-center">
+    <div class="img-container" style="max-width:80%; margin:0 auto;">
+      <img src="images/In_Memoriam_3.jpg" alt="In Memoriam">
+    </div>
+  </div>
+  <div class="panel panel-center panel-dark vertical-center">
+    <p class="slide-title fade-up" style="color:var(--red);">Part Nine</p>
+    <h2 class="main-heading fade-up fade-up-d1" style="font-size:4.5vh;">Every newspaper in 1918<br>attributed the fire to an<br><em>electrical short circuit.</em></h2>
+    <div class="divider fade-up fade-up-d2" style="margin:3vh auto; background:var(--red);"></div>
+    <h2 class="main-heading fade-up fade-up-d3" style="font-size:4.5vh;">It was <em style="color:var(--red);">arson.</em></h2>
+    <p class="body-text fade-up fade-up-d4" style="text-align:center; max-width:85%; margin:2vh auto 0;">The fire was set deliberately by <span class="highlight">Berthe Courtemanche</span>, a nursery worker hired only six weeks before. She was tried, found unfit to stand trial, and transferred to Hôpital Saint-Jean-de-Dieu — a psychiatric institution — where she died roughly ten years later.</p>
+    <p class="body-text fade-up fade-up-d4" style="text-align:center; max-width:85%; margin:2vh auto 0; color:var(--text-dim);">Her name does not appear in any of the February 1918 newspaper accounts.</p>
+  </div>
+  <div class="panel panel-right panel-dark">
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 10: THE NEW STATION ═══════════════ -->
+<div class="slide" data-notes="Shift tone — back to architecture and civic history. The 1931 rebuild as modernization. Shorey & Ritchie. Art Deco. Depression-era public works. Still in service today.">
+  <div class="panel panel-left">
+    <div class="img-container">
+      <img src="images/Caserne_10_Facade.png" alt="Caserne 10 facade, 1931 building">
+      <p class="caption">Caserne 10, 1445 rue Saint-Mathieu — designed by Harold E. Shorey & S. Douglass Ritchie, 1931. Winner of the RAIC award.</p>
+    </div>
+  </div>
+  <div class="panel panel-center">
+    <p class="slide-title fade-up">Part Ten</p>
+    <h2 class="main-heading fade-up fade-up-d1">The second<br><em>Caserne 10</em></h2>
+    <div class="divider fade-up fade-up-d2"></div>
+    <p class="body-text fade-up fade-up-d2">Thirteen years after the fire, the original station was demolished and replaced. The new building went up in 1931, half a block away, at <span class="highlight">1445 rue Saint-Mathieu.</span></p>
+    <p class="body-text fade-up fade-up-d3">An Art Deco design — part of Mayor Camillien Houde's Depression-era public works program. Purpose-built for motorized apparatus. No more horse stalls. Wide vehicle bays, reinforced floors, modern ventilation.</p>
+    <p class="body-text fade-up fade-up-d4">It is <span class="highlight">still in active service today</span> — one hundred and fifty years of continuous fire protection at essentially the same location, through two buildings and two centuries.</p>
+  </div>
+  <div class="panel panel-right">
+    <div class="img-container">
+      <img src="images/Caserne_10_modern_interior.png" alt="Modern interior of Caserne 10">
+      <p class="caption">Interior, Caserne 10 — still operational. The memorial plaque honouring fallen firefighters connects both buildings in institutional memory.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 11: WHAT A STREET NAME REMEMBERS ═══════════════ -->
+<div class="slide" data-notes="This is your closing. Circle back to the street. The fossil metaphor. Take your time. End on 'fossils contain entire worlds' and let silence hold before the final slide.">
+  <div class="panel panel-left">
+    <div class="img-container">
+      <img src="images/map_1880.png" alt="1880 map">
+      <p class="caption">1880 — the neighbourhood around Caserne 10, five years after construction</p>
+    </div>
+  </div>
+  <div class="panel panel-center vertical-center">
+    <p class="slide-title fade-up">Part Eleven</p>
+    <h2 class="main-heading fade-up fade-up-d1">What a street name<br><em>remembers</em></h2>
+    <div class="divider fade-up fade-up-d2" style="margin:2vh auto;"></div>
+    <p class="body-text fade-up fade-up-d3" style="text-align:center; max-width:85%; margin:0 auto;">Rue de la Police remembers a building — a combined police and fire station that stood on Sainte-Catherine from 1875 to 1931. The building is gone. The lane that served it survives, still carrying a name from 1876.</p>
+    <p class="body-text fade-up fade-up-d4" style="text-align:center; max-width:85%; margin:2vh auto 0;">But follow that name — through the toponymy database, through the fire insurance atlases, through the newspapers at BAnQ — and you find the firefighters who lived in that building, the district chief who carried children from a burning dormitory, the sixty infants who died one block away, and a woman whose name didn't appear in any newspaper until the ash had cooled.</p>
+    <div class="divider fade-up fade-up-d4" style="margin:3vh auto;"></div>
+    <p class="quote fade-up fade-up-d4" style="text-align:center; border:none; padding:0;">The street name is a fossil.<br>But fossils, if you know how to read them,<br>contain entire worlds.</p>
+  </div>
+  <div class="panel panel-right">
+    <div class="img-container">
+      <img src="images/Caserne_10_plaque.png" alt="Memorial plaque">
+      <p class="caption">Memorial plaque, Caserne 10 — "Nous, pompiers de Montréal, désirons graver à jamais les noms de nos confrères qui ont perdu la vie dans l'exercice de leurs fonctions."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SLIDE 12: SOURCES ═══════════════ -->
+<div class="slide" data-notes="Quick acknowledgment of sources. Don't read the whole list — just gesture to it and invite questions.">
+  <div class="panel panel-left" style="padding:5vh 2vw; justify-content:flex-start;">
+    <p class="source-label" style="margin-bottom:2vh;">Primary Sources — Newspapers</p>
+    <p class="body-text" style="font-size:1.6vh; line-height:2.2;">Le Devoir, 15 février 1918<br>Le Canada, 15 février 1918<br>Le Canada, 16 février 1918<br>La Patrie, 15 février 1918<br>La Patrie, 18 février 1918<br>La Patrie (hebdomadaire), 21 février 1918<br>Montreal Weekly Witness, 19 February 1918<br>L'Étoile du Nord, 21 février 1918<br>Montreal Gazette, [fragment]</p>
+    <p class="source-label" style="margin-top:3vh; margin-bottom:2vh;">Primary Sources — Cartographic</p>
+    <p class="body-text" style="font-size:1.6vh; line-height:2.2;">Hopkins Atlas, 1879 — BAnQ ark:/52327/2246931<br>Goad Atlas, 1890 — BAnQ ark:/52327/2244212<br>Goad Atlas, 1912–14 — BAnQ ark:/52327/2246836</p>
+  </div>
+  <div class="panel panel-center vertical-center">
+    <p class="slide-title">Sources & Acknowledgments</p>
+    <div class="title-rule"></div>
+    <p class="body-text" style="text-align:center; font-size:2vh; max-width:80%; margin:0 auto;">HIST 306: Montreal Public History<br>Professor VK Preston<br>Concordia University, Winter 2026</p>
+    <div class="title-rule" style="margin:3vh auto;"></div>
+    <p class="body-text" style="text-align:center; font-size:1.8vh; color:var(--text-dim); max-width:80%; margin:0 auto;">All newspaper translations from the original French by the author.<br>Photographs by the author unless otherwise noted.<br>Archival images courtesy of the Archives de Montréal and BAnQ.</p>
+  </div>
+  <div class="panel panel-right" style="padding:5vh 2vw; justify-content:flex-start;">
+    <p class="source-label" style="margin-bottom:2vh;">Secondary Sources</p>
+    <p class="body-text" style="font-size:1.6vh; line-height:2.2;">Osborne, Brian S. "Montreal's Fire Stations." JSSAC 35, no. 2 (2010): 21–46.<br><br>Redfern, Bruce D. "Montreal Fire Department, 1765–2005." MA thesis, Concordia University, 2006.<br><br>McRobie, William Orme. Fighting the Flames! Montreal: "Witness" Printing House, 1881.<br><br>Ville de Montréal. "Rue de la Police." Toponymie de Montréal.</p>
+    <p class="source-label" style="margin-top:3vh; margin-bottom:2vh;">Archival Collections</p>
+    <p class="body-text" style="font-size:1.6vh; line-height:2.2;">Archives de Montréal — refs. Z-419, Z-441, Z-447<br>BAnQ Numérique — newspaper archives<br>Ville de Montréal Toponymie database</p>
+  </div>
+</div>
+
+<!-- ═══════════════ NAVIGATION ═══════════════ -->
+<div id="nav"></div>
+<div id="slide-counter"></div>
+<div id="notes-overlay">
+  <p id="notes-label">PRESENTER NOTES — press N to toggle</p>
+  <p id="notes-text"></p>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const nav = document.getElementById('nav');
+  const counter = document.getElementById('slide-counter');
+  const notesOverlay = document.getElementById('notes-overlay');
+  const notesText = document.getElementById('notes-text');
+  let current = 0;
+  let notesVisible = false;
+
+  // Build nav dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    nav.appendChild(dot);
+  });
+
+  function goTo(index) {
+    if (index < 0 || index >= slides.length) return;
+    slides[current].classList.remove('active');
+    // Reset animations on leaving slide
+    slides[current].querySelectorAll('.fade-up').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight; // force reflow
+      el.style.animation = '';
+    });
+    current = index;
+    slides[current].classList.add('active');
+    // Update nav
+    document.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+    // Update notes
+    const note = slides[current].getAttribute('data-notes') || '';
+    notesText.textContent = note;
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      goTo(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      goTo(current - 1);
+    } else if (e.key === 'n' || e.key === 'N') {
+      notesVisible = !notesVisible;
+      notesOverlay.classList.toggle('visible', notesVisible);
+    } else if (e.key === 'Home') {
+      goTo(0);
+    } else if (e.key === 'End') {
+      goTo(slides.length - 1);
+    }
+  });
+
+  // Initialize
+  goTo(0);
+</script>
+</body>
+</html>
