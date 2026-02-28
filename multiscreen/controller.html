@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Caserne 10 — Multiscreen Controller</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a; --text: #e0d8cc; --text-dim: #8a8278;
+    --accent: #c9a94e; --accent-dim: #8a7535; --red: #8b3a3a;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--sans);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; min-height: 100vh; padding: 4vh 4vw;
+  }
+  h1 {
+    font-family: var(--serif); font-size: 4vh; font-weight: 300;
+    margin-bottom: 1vh;
+  }
+  h1 em { color: var(--accent); font-style: italic; }
+  .subtitle {
+    font-size: 1.8vh; color: var(--text-dim); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 5vh;
+  }
+  .launch-btn {
+    display: block; width: 400px; padding: 2.5vh 3vw; margin: 1.5vh 0;
+    background: #141210; border: 1px solid var(--accent-dim);
+    color: var(--accent); font-family: var(--sans); font-size: 2.2vh;
+    font-weight: 400; cursor: pointer; letter-spacing: 0.05em;
+    transition: all 0.3s;
+  }
+  .launch-btn:hover {
+    background: #1a1815; border-color: var(--accent);
+  }
+  .launch-btn span {
+    display: block; font-size: 1.4vh; color: var(--text-dim);
+    margin-top: 0.5vh; font-weight: 300;
+  }
+  .launch-all {
+    margin-top: 3vh; padding: 2.5vh 5vw;
+    background: var(--accent-dim); border: none;
+    color: var(--bg); font-family: var(--sans); font-size: 2.4vh;
+    font-weight: 600; cursor: pointer; letter-spacing: 0.1em;
+    transition: all 0.3s;
+  }
+  .launch-all:hover { background: var(--accent); }
+  .divider { width: 80px; height: 1px; background: var(--accent-dim); margin: 4vh 0; }
+  .instructions {
+    max-width: 600px; font-size: 1.8vh; color: var(--text-dim);
+    line-height: 1.8; text-align: center;
+  }
+  .instructions strong { color: var(--text); font-weight: 400; }
+  .controls {
+    margin-top: 4vh; display: flex; gap: 2vw; align-items: center;
+  }
+  .ctrl-btn {
+    padding: 1.5vh 2vw; background: #141210; border: 1px solid #2a2520;
+    color: var(--text); font-family: var(--sans); font-size: 2vh;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); }
+  #slide-num {
+    font-family: var(--serif); font-size: 3vh; color: var(--accent);
+    min-width: 100px; text-align: center;
+  }
+  .notes-box {
+    margin-top: 3vh; max-width: 600px; width: 100%;
+    background: #0d0c0a; border: 1px solid #1a1815;
+    padding: 2.5vh 2.5vw; min-height: 10vh;
+  }
+  .notes-label {
+    font-size: 1.2vh; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent-dim); margin-bottom: 1vh;
+  }
+  #notes-text {
+    font-size: 1.8vh; color: var(--text-dim); line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<h1>From a Street Name to a <em>Catastrophe</em></h1>
+<p class="subtitle">Multiscreen Controller</p>
+
+<button class="launch-btn" onclick="window.open('left.html','left')">
+  Open LEFT Screen
+  <span>Maps & spatial evidence — drag to left monitor, press F11</span>
+</button>
+<button class="launch-btn" onclick="window.open('center.html','center')">
+  Open CENTER Screen
+  <span>Main narrative — drag to center monitor, press F11</span>
+</button>
+<button class="launch-btn" onclick="window.open('right.html','right')">
+  Open RIGHT Screen
+  <span>Primary sources & documents — drag to right monitor, press F11</span>
+</button>
+
+<button class="launch-all" onclick="window.open('left.html','left'); window.open('center.html','center'); window.open('right.html','right');">
+  LAUNCH ALL THREE
+</button>
+
+<div class="divider"></div>
+
+<div class="instructions">
+  <strong>Setup:</strong> Click "Launch All Three" to open all panels. Drag each window to its monitor and press <strong>F11</strong> for fullscreen.<br><br>
+  <strong>Navigation:</strong> Press <strong>→</strong> or <strong>Space</strong> in <em>any</em> window to advance all three screens simultaneously. Or use the controls below.
+</div>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="goTo(current - 1)">← PREV</button>
+  <span id="slide-num">1 / 13</span>
+  <button class="ctrl-btn" onclick="goTo(current + 1)">NEXT →</button>
+</div>
+
+<div class="notes-box">
+  <p class="notes-label">Presenter Notes</p>
+  <p id="notes-text">Welcome the audience. Introduce yourself and the course (HIST 306, Dr. Preston). Explain the three-screen format: left = maps and spatial evidence, center = narrative, right = primary sources and documents.</p>
+</div>
+
+<script>
+const TOTAL = 13;
+let current = 0;
+const channel = new BroadcastChannel('caserne10-sync');
+const slideNum = document.getElementById('slide-num');
+const notesText = document.getElementById('notes-text');
+
+const notes = [
+  "Welcome the audience. Introduce yourself and the course (HIST 306, Dr. Preston). Explain the three-screen format: left = maps and spatial evidence, center = narrative, right = primary sources and documents.",
+  "Tell the story naturally — your Monday walk. The curiosity. The question that wouldn't let go. Keep it personal and conversational.",
+  "The key discovery. Read the toponymy entry — translate it live for the audience if you want. Emphasize: the street is a fossil of a building that no longer exists.",
+  "Context: the 1863 professionalization, Chief Bertram, the transition from volunteer to paid. The 1852 Great Fire as the catalyst. Perrault's station as part of this new era.",
+  "Use the maps to show change over time. Point to specific features: the densification, the commercial growth along Ste-Catherine, the increasing fire risk.",
+  "Set the scene carefully. The audience needs to understand the scale of the building, who was inside, and the vulnerability of the infants. Slow down here.",
+  "This is the dramatic turn. Read slowly. The alarm sequence gives the audience a sense of escalation — first alarm, second, third. 18 stations. Let the numbers land.",
+  "Sub-Chief Marin is the central figure. He carried four children at a time. He ordered the rescue stopped when the dormitory became unsurvivable. This is where the station's history becomes human.",
+  "Slow down here. The number alone is devastating. If you read the victim names, read them slowly — these are real children. The audience needs time to absorb this.",
+  "PAUSE before you start this slide. Let the transition from the previous slide settle. This is the reveal that changes everything. Every 1918 newspaper said 'electrical short circuit.' The truth came later.",
+  "Shift tone — back to architecture and civic history. The 1931 rebuild as modernization. Shorey & Ritchie. Art Deco. Depression-era public works. Still in service today.",
+  "This is your closing. Circle back to the street. The fossil metaphor. Take your time. End on 'fossils contain entire worlds' and let silence hold before the final slide.",
+  "Quick acknowledgment of sources. Don't read the whole list — just gesture to it and invite questions."
+];
+
+function goTo(index) {
+  if (index < 0 || index >= TOTAL) return;
+  current = index;
+  slideNum.textContent = (current + 1) + ' / ' + TOTAL;
+  notesText.textContent = notes[current] || '';
+  channel.postMessage({ type: 'goto', index: current });
+}
+
+channel.onmessage = (e) => {
+  if (e.data.type === 'goto') {
+    current = e.data.index;
+    slideNum.textContent = (current + 1) + ' / ' + TOTAL;
+    notesText.textContent = notes[current] || '';
+  }
+};
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+  else if (e.key === 'Home') { goTo(0); }
+  else if (e.key === 'End') { goTo(TOTAL - 1); }
+});
+</script>
+</body>
+</html>
