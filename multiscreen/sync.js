@@ -14,7 +14,7 @@
   else if (path.includes('center')) screenRole = 'center';
 
   const STAGED_SLIDES = {
-    0: 1,  // Title: 0=center+"From a Street Name"+left, 1=+"to a Catastrophe"+right
+    0: 2,  // Title: 0=course info, 1=+"From a Street Name"+left, 2=+"to a Catastrophe"+right
     3: 3   // First Caserne: 0=center p1, 1=+chief+helmet, 2=+p2+greatfire, 3=+p3+map
   };
 
