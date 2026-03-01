@@ -65,7 +65,7 @@ let stage = 0;
 const channel = new BroadcastChannel('caserne10-sync');
 
 const STAGED = {
-  0: { max: 2, labels: ['Center only', '+ Left 🔊 traffic', '+ Right 🔊 fire'] },
+  0: { max: 2, labels: ['Center only', '+ Left screen', '+ Right screen'] },
   3: { max: 3, labels: ['Center: paragraph 1', '+ Left: Chief / Right: helmet', '+ Center: p2 / Right: Great Fire 🔥', '+ Center: p3 / Left: map'] }
 };
 
@@ -75,7 +75,7 @@ const notes = [
   "The toponymy discovery. Read the entry, translate live. The street is a fossil.",
   "STAGED SLIDE — First shows only paragraph 1 (Bertram). → reveals Chief photo (left) + helmet (right). → adds paragraph 2 (Great Fire) + animated fire image (right). → adds paragraph 3 (Caserne 10) + map (left).",
   "Maps show change over time. Densification, commercial growth, fire risk.",
-  "🔊 GREGORIAN CHANT. Set the scene. The Motherhouse, the soldiers, the crèche. 170 infants. Chant fades when you advance.",
+  "Set the scene. The Motherhouse, the soldiers, the crèche. 170 infants.",
   "The dramatic turn. Alarm sequence. 18 stations. Let the numbers land.",
   "Sub-Chief Marin. Four children at a time. Rescue stopped. The station's history becomes human.",
   "The death toll. Read victim names slowly. Let the audience absorb.",
@@ -109,8 +109,8 @@ function updateUI() {
     stageBar.style.display = 'none';
   }
 
-  const soundSlides = { 5: '🔊 Gregorian chant playing' };
-  soundInfo.innerHTML = soundSlides[current] ? '<span class="sound-badge">' + soundSlides[current] + '</span>' : '';
+  const soundSlides = {};
+  soundInfo.innerHTML = '';
 }
 
 function advance() {
