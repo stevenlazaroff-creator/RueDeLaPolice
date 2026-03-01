@@ -5,64 +5,31 @@
 <title>Caserne 10 — Multiscreen Controller</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0a; --text: #e0d8cc; --text-dim: #8a8278;
-    --accent: #c9a94e; --accent-dim: #8a7535; --red: #8b3a3a;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'Source Sans 3', 'Helvetica Neue', sans-serif;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: var(--bg); color: var(--text); font-family: var(--sans);
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; min-height: 100vh; padding: 3vh 4vw;
-  }
-  h1 { font-family: var(--serif); font-size: 3.5vh; font-weight: 300; margin-bottom: 0.5vh; }
-  h1 em { color: var(--accent); font-style: italic; }
-  .subtitle { font-size: 1.6vh; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 3vh; }
-  .launch-btn {
-    display: block; width: 380px; padding: 2vh 2.5vw; margin: 1vh 0;
-    background: #141210; border: 1px solid var(--accent-dim);
-    color: var(--accent); font-family: var(--sans); font-size: 2vh;
-    cursor: pointer; transition: all 0.3s;
-  }
-  .launch-btn:hover { background: #1a1815; border-color: var(--accent); }
-  .launch-btn span { display: block; font-size: 1.3vh; color: var(--text-dim); margin-top: 0.3vh; }
-  .launch-all {
-    margin-top: 2vh; padding: 2vh 4vw;
-    background: var(--accent-dim); border: none;
-    color: var(--bg); font-family: var(--sans); font-size: 2.2vh;
-    font-weight: 600; cursor: pointer; transition: all 0.3s;
-  }
-  .launch-all:hover { background: var(--accent); }
-  .divider { width: 60px; height: 1px; background: var(--accent-dim); margin: 2.5vh 0; }
-  .stage-indicator {
-    display: flex; gap: 1.5vw; margin: 2vh 0;
-    font-size: 1.6vh; letter-spacing: 0.05em;
-  }
-  .stage-dot {
-    padding: 0.8vh 1.2vw; border: 1px solid #2a2520;
-    color: var(--text-dim); transition: all 0.3s;
-  }
-  .stage-dot.active { border-color: var(--accent); color: var(--accent); background: #1a1815; }
-  .stage-dot.sound::after { content: ' 🔊'; font-size: 1.2vh; }
-  .controls { display: flex; gap: 2vw; align-items: center; margin-top: 2vh; }
-  .ctrl-btn {
-    padding: 1.5vh 2.5vw; background: #141210; border: 1px solid #2a2520;
-    color: var(--text); font-family: var(--sans); font-size: 2vh;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); }
-  #slide-num { font-family: var(--serif); font-size: 3vh; color: var(--accent); min-width: 100px; text-align: center; }
-  .notes-box {
-    margin-top: 2vh; max-width: 580px; width: 100%;
-    background: #0d0c0a; border: 1px solid #1a1815;
-    padding: 2vh 2vw; min-height: 8vh;
-  }
-  .notes-label { font-size: 1.1vh; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 0.8vh; }
-  #notes-text { font-size: 1.7vh; color: var(--text-dim); line-height: 1.6; }
-  .instructions { max-width: 580px; font-size: 1.5vh; color: var(--text-dim); line-height: 1.7; text-align: center; }
-  .instructions strong { color: var(--text); font-weight: 400; }
+  :root { --bg: #0a0a0a; --text: #e0d8cc; --text-dim: #8a8278; --accent: #c9a94e; --accent-dim: #8a7535; --red: #8b3a3a; --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Source Sans 3', 'Helvetica Neue', sans-serif; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:var(--sans); display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; padding:3vh 4vw; }
+  h1 { font-family:var(--serif); font-size:3.5vh; font-weight:300; margin-bottom:0.5vh; }
+  h1 em { color:var(--accent); font-style:italic; }
+  .subtitle { font-size:1.6vh; color:var(--text-dim); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:3vh; }
+  .launch-btn { display:block; width:380px; padding:2vh 2.5vw; margin:1vh 0; background:#141210; border:1px solid var(--accent-dim); color:var(--accent); font-family:var(--sans); font-size:2vh; cursor:pointer; transition:all 0.3s; }
+  .launch-btn:hover { background:#1a1815; border-color:var(--accent); }
+  .launch-btn span { display:block; font-size:1.3vh; color:var(--text-dim); margin-top:0.3vh; }
+  .launch-all { margin-top:2vh; padding:2vh 4vw; background:var(--accent-dim); border:none; color:var(--bg); font-family:var(--sans); font-size:2.2vh; font-weight:600; cursor:pointer; transition:all 0.3s; }
+  .launch-all:hover { background:var(--accent); }
+  .divider { width:60px; height:1px; background:var(--accent-dim); margin:2.5vh 0; }
+  .stage-indicator { display:flex; gap:1.5vw; margin:2vh 0; font-size:1.6vh; }
+  .stage-dot { padding:0.8vh 1.2vw; border:1px solid #2a2520; color:var(--text-dim); transition:all 0.3s; }
+  .stage-dot.active { border-color:var(--accent); color:var(--accent); background:#1a1815; }
+  .controls { display:flex; gap:2vw; align-items:center; margin-top:2vh; }
+  .ctrl-btn { padding:1.5vh 2.5vw; background:#141210; border:1px solid #2a2520; color:var(--text); font-family:var(--sans); font-size:2vh; cursor:pointer; transition:all 0.2s; }
+  .ctrl-btn:hover { border-color:var(--accent); color:var(--accent); }
+  #slide-num { font-family:var(--serif); font-size:3vh; color:var(--accent); min-width:100px; text-align:center; }
+  .notes-box { margin-top:2vh; max-width:580px; width:100%; background:#0d0c0a; border:1px solid #1a1815; padding:2vh 2vw; min-height:8vh; }
+  .notes-label { font-size:1.1vh; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent-dim); margin-bottom:0.8vh; }
+  #notes-text { font-size:1.7vh; color:var(--text-dim); line-height:1.6; }
+  .sound-badge { display:inline-block; padding:0.3vh 0.8vw; background:#1a1510; border:1px solid var(--accent-dim); color:var(--accent); font-size:1.3vh; margin-top:1vh; border-radius:2px; }
+  .instructions { max-width:580px; font-size:1.5vh; color:var(--text-dim); line-height:1.7; text-align:center; margin-top:2vh; }
+  .instructions strong { color:var(--text); font-weight:400; }
 </style>
 </head>
 <body>
@@ -70,18 +37,10 @@
 <h1>From a Street Name to a <em>Catastrophe</em></h1>
 <p class="subtitle">Multiscreen Controller</p>
 
-<button class="launch-btn" onclick="window.open('left.html','left')">
-  Open LEFT Screen <span>Maps & spatial evidence — drag to left monitor, F11</span>
-</button>
-<button class="launch-btn" onclick="window.open('center.html','center')">
-  Open CENTER Screen <span>Main narrative — drag to center monitor, F11</span>
-</button>
-<button class="launch-btn" onclick="window.open('right.html','right')">
-  Open RIGHT Screen <span>Primary sources — drag to right monitor, F11</span>
-</button>
-<button class="launch-all" onclick="window.open('left.html','left'); window.open('center.html','center'); window.open('right.html','right');">
-  LAUNCH ALL THREE
-</button>
+<button class="launch-btn" onclick="window.open('left.html','left')">Open LEFT Screen <span>Maps & spatial evidence — drag to left monitor, F11</span></button>
+<button class="launch-btn" onclick="window.open('center.html','center')">Open CENTER Screen <span>Main narrative — drag to center monitor, F11</span></button>
+<button class="launch-btn" onclick="window.open('right.html','right')">Open RIGHT Screen <span>Primary sources — drag to right monitor, F11</span></button>
+<button class="launch-all" onclick="window.open('left.html','left'); window.open('center.html','center'); window.open('right.html','right');">LAUNCH ALL THREE</button>
 
 <div class="divider"></div>
 
@@ -93,47 +52,52 @@
 
 <div class="controls">
   <button class="ctrl-btn" onclick="retreat()">← PREV</button>
-  <span id="slide-num">1 / 13</span>
+  <span id="slide-num">1 / 14</span>
   <button class="ctrl-btn" onclick="advance()">NEXT →</button>
 </div>
 
 <div class="notes-box">
   <p class="notes-label">Presenter Notes</p>
   <p id="notes-text"></p>
+  <p id="sound-info"></p>
 </div>
 
 <div class="divider"></div>
-
 <p class="instructions">
-  <strong>Title slide:</strong> Center appears first → press <strong>→</strong> to reveal left panel (traffic sounds) → press <strong>→</strong> again to reveal right panel (fire sounds) → press <strong>→</strong> to continue.<br><br>
-  <strong>All other slides:</strong> Press <strong>→</strong> or <strong>Space</strong> in any window to advance all three screens simultaneously.
+  <strong>Title slide:</strong> Center appears first → <strong>→</strong> reveals left (traffic sounds) → <strong>→</strong> reveals right (fire sounds, traffic fades) → <strong>→</strong> to Part One.<br><br>
+  <strong>Part Five:</strong> Gregorian chant fades in automatically, fades out when you advance.<br><br>
+  <strong>All other slides:</strong> <strong>→</strong> or <strong>Space</strong> in any window advances all three.
 </p>
 
 <script>
-const TOTAL = 13;
+const TOTAL = 14;
 let current = 0;
 let titleStage = 0;
 const TITLE_MAX_STAGE = 2;
 const channel = new BroadcastChannel('caserne10-sync');
 
 const notes = [
-  "TITLE SLIDE — The audience sees only the center screen at first. Press → to reveal left (street photo + traffic sounds), then → again to reveal right (fire photo + fire sounds). Three presses total to move to Part One.",
-  "Tell the story naturally — your Monday walk. The curiosity. The question that wouldn't let go. Keep it personal and conversational.",
-  "The key discovery. Read the toponymy entry — translate it live for the audience if you want. Emphasize: the street is a fossil of a building that no longer exists.",
-  "Context: the 1863 professionalization, Chief Bertram, the transition from volunteer to paid. The 1852 Great Fire as the catalyst.",
-  "Use the maps to show change over time. The densification, commercial growth along Ste-Catherine, increasing fire risk.",
-  "Set the scene carefully. The scale of the building, who was inside, the vulnerability of the infants. Slow down here.",
-  "The dramatic turn. Read slowly. The alarm sequence gives escalation. 18 stations. Let the numbers land.",
-  "Sub-Chief Marin is the central figure. He carried four children at a time. He ordered rescue stopped. This is where the station's history becomes human.",
-  "The number alone is devastating. Read victim names slowly — these are real children. The audience needs time.",
-  "PAUSE before you start. Let the previous slide settle. This is the reveal. Every newspaper said 'electrical short circuit.' The truth came later.",
-  "Shift tone — back to architecture. The 1931 rebuild. Shorey & Ritchie. Art Deco. Still in service today.",
+  "TITLE SLIDE — Center only at first. → reveals left (Rue de la Police photo + traffic). → reveals right (fire photo + fire/voices). → moves to Part One.",
+  "Tell the story naturally — your Monday walk. The curiosity. Why does a back lane have a name?",
+  "The key discovery. Read the toponymy entry — translate it live. The street is a fossil of a building that no longer exists.",
+  "Context: 1863 professionalization, Chief Bertram, the 1852 Great Fire as catalyst. Perrault's station as part of this new era.",
+  "Use the maps to show change over time. Densification, commercial growth, increasing fire risk.",
+  "🔊 GREGORIAN CHANT fades in. Set the scene carefully. The scale of the Motherhouse, who was inside, the vulnerability of the infants. The chant fades out when you advance.",
+  "The dramatic turn. The alarm sequence on the right gives escalation. 18 stations. Let the numbers land.",
+  "Sub-Chief Marin is the central figure. Four children at a time. He ordered rescue stopped. This is where the station's history becomes human.",
+  "The number alone is devastating. Read victim names slowly — these are real children. Let the audience absorb.",
+  "PAUSE. Let the previous slide settle. The reveal: every newspaper said 'electrical short circuit.' The truth came later.",
+  "The rebuild. Shorey & Ritchie — Art Deco architects. Left: the move to the new address. Right: Mayor Camillien Houde. RAIC first prize. One of twenty Depression-era civic buildings.",
+  "The station today — still in active service. 150 years of continuous fire protection. The interior, the plaque, the institutional memory connecting both buildings.",
   "Your closing. Circle back to the street name. The fossil metaphor. Take your time. Let silence hold.",
   "Quick acknowledgment of sources. Gesture to it, invite questions."
 ];
 
+const soundSlides = { 5: '🔊 Gregorian chant playing' };
+
 const slideNum = document.getElementById('slide-num');
 const notesText = document.getElementById('notes-text');
+const soundInfo = document.getElementById('sound-info');
 const stageBar = document.getElementById('stage-bar');
 const s0 = document.getElementById('s0');
 const s1 = document.getElementById('s1');
@@ -142,11 +106,11 @@ const s2 = document.getElementById('s2');
 function updateUI() {
   slideNum.textContent = (current + 1) + ' / ' + TOTAL;
   notesText.textContent = notes[current] || '';
-  // Show/hide stage bar
   stageBar.style.display = (current === 0) ? 'flex' : 'none';
   s0.className = 'stage-dot' + (titleStage >= 0 ? ' active' : '');
   s1.className = 'stage-dot' + (titleStage >= 1 ? ' active' : '');
   s2.className = 'stage-dot' + (titleStage >= 2 ? ' active' : '');
+  soundInfo.innerHTML = soundSlides[current] ? '<span class="sound-badge">' + soundSlides[current] + '</span>' : '';
 }
 
 function advance() {
@@ -169,7 +133,7 @@ function retreat() {
     updateUI();
   } else {
     current = Math.max(current - 1, 0);
-    titleStage = (current === 0) ? 0 : 0;
+    titleStage = 0;
     channel.postMessage({ type: 'goto', index: current });
     updateUI();
   }
