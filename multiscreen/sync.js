@@ -16,8 +16,7 @@
   const STAGED_SLIDES = {
     0: 2,  // Title: 0=course info, 1=+"From a Street Name"+left, 2=+"to a Catastrophe"+right
     2: 3,  // Toponymy: 0=title, 1=+p1+left, 2=+p2+right(Perrault), 3=+p3+typewriter
-    3: 3,  // First Caserne: 0=center p1, 1=+chief+helmet, 2=+p2+greatfire, 3=+p3+map
-    4: 2   // Neighbourhood: 0=intro, 1=+1890 text+left map, 2=+1915 text+right map
+    3: 3   // First Caserne: 0=center p1, 1=+chief+helmet, 2=+p2+greatfire, 3=+p3+map
   };
 
   function getMaxStage(slideIndex) {
