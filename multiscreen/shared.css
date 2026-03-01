@@ -114,6 +114,11 @@ html, body {
 .stage-hidden.revealed { opacity: 1 !important; }
 [data-stage-min] { opacity: 0; transition: opacity 1.5s ease; pointer-events: none; }
 
+/* Typewriter effect */
+.typewriter { border-right: 2px solid var(--accent); padding-right: 0.3vw; animation: blink-cursor 0.8s step-end infinite; }
+.typewriter:empty { border-right: none; animation: none; }
+@keyframes blink-cursor { 0%,100% { border-color: var(--accent); } 50% { border-color: transparent; } }
+
 /* Fire/smoke animation overlay */
 .fire-container { position: relative; display: inline-block; width: 100%; }
 .fire-container img { width: 100%; max-height: 75vh; object-fit: contain; border: 1px solid var(--border); }

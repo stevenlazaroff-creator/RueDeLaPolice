@@ -15,6 +15,7 @@
 
   const STAGED_SLIDES = {
     0: 2,  // Title: 0=course info, 1=+"From a Street Name"+left, 2=+"to a Catastrophe"+right
+    2: 3,  // Toponymy: 0=title, 1=+p1+left, 2=+p2+right(Perrault), 3=+p3+typewriter
     3: 3   // First Caserne: 0=center p1, 1=+chief+helmet, 2=+p2+greatfire, 3=+p3+map
   };
 
@@ -58,6 +59,31 @@
       const min = parseInt(fireOverlay.getAttribute('data-stage-min') || '0');
       fireOverlay.style.display = (stage >= min) ? 'block' : 'none';
     }
+
+    // Trigger typewriter animations after visibility update
+    setTimeout(() => runTypewriters(), 800);
+  }
+
+  // Typewriter animation
+  let typewriterTimer = null;
+  function runTypewriters() {
+    if (typewriterTimer) { clearInterval(typewriterTimer); typewriterTimer = null; }
+    const slide = slides[current];
+    slide.querySelectorAll('.typewriter[data-typewriter]').forEach(el => {
+      const parent = el.closest('[data-stage-min]');
+      if (parent && parent.style.opacity === '1') {
+        const text = el.getAttribute('data-typewriter');
+        if (el.textContent === text) return; // already done
+        el.textContent = '';
+        let i = 0;
+        typewriterTimer = setInterval(() => {
+          if (i < text.length) { el.textContent += text[i]; i++; }
+          else { clearInterval(typewriterTimer); typewriterTimer = null; }
+        }, 40);
+      } else {
+        el.textContent = '';
+      }
+    });
   }
 
   function goTo(index) {
