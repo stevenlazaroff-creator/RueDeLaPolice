@@ -88,10 +88,11 @@
         if (el.textContent === text) return; // already done
         el.textContent = '';
         let i = 0;
+        const speed = parseInt(el.getAttribute('data-typewriter-speed') || '40');
         typewriterTimer = setInterval(() => {
           if (i < text.length) { el.textContent += text[i]; i++; }
           else { clearInterval(typewriterTimer); typewriterTimer = null; }
-        }, 40);
+        }, speed);
       } else {
         el.textContent = '';
       }
