@@ -16,7 +16,15 @@
   const STAGED_SLIDES = {
     0: 2,  // Title: 0=course info, 1=+"From a Street Name"+left, 2=+"to a Catastrophe"+right
     2: 3,  // Toponymy: 0=title, 1=+p1+left, 2=+p2+right(Perrault), 3=+p3+typewriter
-    3: 3   // First Caserne: 0=center p1, 1=+chief+helmet, 2=+p2+greatfire, 3=+p3+map
+    3: 3,  // First Caserne: 0=center p1, 1=+chief+helmet, 2=+p2+greatfire, 3=+p3+photo
+    4: 3,  // Neighbourhood: 0=title, 1=+atlases+left1890, 2=+1890text, 3=+surrounded+right1912
+    5: 3,  // Grey Nuns: 0=title, 1=+motherhouse+left, 2=+1918+right, 3=+170infants
+    6: 3,  // Valentine's: 0=title, 1=+flames+right7:51, 2=+right8:07, 3=+eighteen+leftfire
+    7: 3,  // Into flames: 0=title, 1=+marin+rightwagon, 2=+nuns+leftengine, 3=+gust+quote
+    8: 2,  // Deaths: 0=center all, 1=+left, 2=+right
+    9: 3,  // Arson: 0=title+newspapers, 1=+arson, 2=+berthe+bothimages, 3=+hername
+    11: 3, // Today: 0=title, 1=+1445, 2=+plaque text+leftplaque, 3=+artdeco+rightfacade
+    12: 3  // Remembers: 0=title, 1=+remembers+leftphoto, 2=+follow+rightfacade, 3=+typewriter
   };
 
   function getMaxStage(slideIndex) {

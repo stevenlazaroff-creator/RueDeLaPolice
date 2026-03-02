@@ -67,23 +67,31 @@ const channel = new BroadcastChannel('caserne10-sync');
 const STAGED = {
   0: { max: 2, labels: ['Course info + credits', '+ From a Street Name + left', '+ to a Catastrophe + right'] },
   2: { max: 3, labels: ['Title only', '+ paragraph 1 + left (toponymy)', '+ paragraph 2 + right (Perrault)', '+ paragraph 3 + typewriter'] },
-  3: { max: 3, labels: ['Center: paragraph 1', '+ Left: Chief / Right: helmet', '+ Center: p2 / Right: Great Fire 🔥', '+ Center: p3 / Left: map'] }
+  3: { max: 3, labels: ['Center: paragraph 1', '+ Left: Chief / Right: helmet', '+ Center: p2 / Right: Great Fire', '+ Center: p3 / Left: photo'] },
+  4: { max: 3, labels: ['Title only', '+ atlases text + left (1890 Goad)', '+ 1890/1912 text', '+ surrounded text + right (1912 Goad)'] },
+  5: { max: 3, labels: ['Title only', '+ Motherhouse text + left (exterior)', '+ 1918 text + right (Guy St)', '+ 170 infants text'] },
+  6: { max: 3, labels: ['Title only', '+ flames text + right (7:50/7:51)', '+ right (8:07 alarm)', '+ eighteen stations + left (fire postcard)'] },
+  7: { max: 3, labels: ['Title only', '+ Marin text + right (hose wagon)', '+ Nuns text + left (fire engine)', '+ gust of flame + La Patrie quote'] },
+  8: { max: 2, labels: ['Center: deaths + names', '+ left image', '+ right image'] },
+  9: { max: 3, labels: ['Every newspaper...', '+ It was arson.', '+ Berthe text + both images', '+ Her name...'] },
+  11: { max: 3, labels: ['Title only', '+ 1445 still active', '+ memorial plaque text + left (plaque)', '+ Art Deco text + right (facade)'] },
+  12: { max: 3, labels: ['Title only', '+ remembers text + left (Z-419)', '+ follow that name + right (facade)', '+ typewriter: fossil'] }
 };
 
 const notes = [
   "TITLE — Course info + subtitle/credits. → 'From a Street Name' + street sign on left. → 'to a Catastrophe' + fire image on right. → Part One.",
   "Your Monday walk. The curiosity. Why does a back lane have a name?",
-  "STAGED — Title only. → p1 (April 10, 1876) + left (toponymy database). → p2 (Perrault built Station 10) + right (Perrault portrait). → p3 (demolished 1931) + typewriter: 'The name is a fossil...'",
-  "STAGED SLIDE — First shows only paragraph 1 (Bertram). → reveals Chief photo (left) + helmet (right). → adds paragraph 2 (Great Fire) + animated fire image (right). → adds paragraph 3 (Caserne 10) + map (left).",
-  "Maps show change over time. Densification, commercial growth, fire risk.",
-  "Set the scene. The Motherhouse, the soldiers, the crèche. 170 infants.",
-  "The dramatic turn. Alarm sequence. 18 stations. Let the numbers land.",
-  "Sub-Chief Marin. Four children at a time. Rescue stopped. The station's history becomes human.",
-  "The death toll. Read victim names slowly. Let the audience absorb.",
-  "PAUSE. The arson reveal. Every newspaper said 'electrical short circuit.' The truth came later.",
+  "STAGED — Title only. → p1 (April 10, 1876) + left (toponymy). → p2 (Perrault) + right (portrait). → p3 (demolished 1931) + typewriter.",
+  "STAGED — p1 (Bertram). → Chief photo (left) + helmet (right). → p2 (Great Fire) + animated fire (right). → p3 (Caserne 10) + original photo (left).",
+  "STAGED — Title only. → atlases text + 1890 Goad (left). → 1890/1912 text. → surrounded text + 1912 Goad (right).",
+  "STAGED — Title only. → Motherhouse text + exterior (left). → 1918 text + Guy St entrance (right). → 170 infants text.",
+  "STAGED — Title only. → flames text + alarm 7:50/7:51 (right). → alarm 8:07 (right). → eighteen stations text + fire postcard (left).",
+  "STAGED — Title only. → Sub-Chief Marin + hose wagon (right). → Nuns + fire engine (left). → gust of flame + La Patrie quote.",
+  "STAGED — Center all at once (deaths + names). → left image. → right image.",
+  "STAGED — Every newspaper... → It was arson. → Berthe paragraph + both images. → Her name does not appear...",
   "The rebuild. Shorey & Ritchie. Video plays on center right. Houde's program on right screen.",
-  "The station today. 150 years continuous service. Interior, plaque, institutional memory.",
-  "Your closing. The fossil metaphor. Take your time. Let silence hold.",
+  "STAGED — Title only. → 1445 still active. → memorial plaque text + plaque (left). → Art Deco text + facade (right).",
+  "STAGED — Title only. → remembers text + Z-419 (left). → follow that name + facade (right). → typewriter: fossil.",
   "Sources. Gesture, invite questions."
 ];
 
