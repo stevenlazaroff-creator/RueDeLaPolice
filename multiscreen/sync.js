@@ -25,7 +25,7 @@
     9: 3,  // Arson: 0=title+newspapers, 1=+arson, 2=+berthe+bothimages, 3=+hername
     10: 2, // Second Caserne: 0=center(text+video), 1=+right(Houde), 2=+left(moving)
     11: 3, // Today: 0=title, 1=+1445+left(Caserne10 BAnQ), 2=+plaque text+right(plaque), 3=+artdeco+right(caserne_10 SIM)
-    12: 3  // Remembers: 0=title, 1=+remembers+leftphoto, 2=+follow+rightfacade, 3=+typewriter
+    12: 3  // Remembers: 0=title, 1=+remembers+leftphoto, 2=+follow+rightRueDeLaPolice, 3=+fossil
   };
 
   function getMaxStage(slideIndex) {
