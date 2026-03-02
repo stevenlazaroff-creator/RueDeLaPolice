@@ -50,12 +50,15 @@
     slide.querySelectorAll('[data-stage-min]').forEach(el => {
       const min = parseInt(el.getAttribute('data-stage-min'));
       const max = el.getAttribute('data-stage-max') ? parseInt(el.getAttribute('data-stage-max')) : 999;
+      const wasVisible = el.style.opacity === '1';
       if (stage >= min && stage <= max) {
         el.style.opacity = '1';
         el.style.pointerEvents = 'auto';
-        el.querySelectorAll('.fade-up').forEach(f => {
-          f.style.animation = 'none'; f.offsetHeight; f.style.animation = '';
-        });
+        if (!wasVisible) {
+          el.querySelectorAll('.fade-up').forEach(f => {
+            f.style.animation = 'none'; f.offsetHeight; f.style.animation = '';
+          });
+        }
       } else {
         el.style.opacity = '0';
         el.style.pointerEvents = 'none';
