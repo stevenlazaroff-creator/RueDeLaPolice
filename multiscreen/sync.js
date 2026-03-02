@@ -24,7 +24,7 @@
     8: 2,  // Deaths: 0=center all, 1=+left, 2=+right
     9: 3,  // Arson: 0=title+newspapers, 1=+arson, 2=+berthe+bothimages, 3=+hername
     10: 2, // Second Caserne: 0=center(text+video), 1=+right(Houde), 2=+left(moving)
-    11: 3, // Today: 0=title, 1=+1445+leftfront, 2=+plaque text+leftplaque, 3=+artdeco
+    11: 3, // Today: 0=title, 1=+1445+left(original caserne), 2=+plaque text+right(plaque), 3=+artdeco
     12: 3  // Remembers: 0=title, 1=+remembers+leftphoto, 2=+follow+rightfacade, 3=+typewriter
   };
 
