@@ -17,7 +17,7 @@
     0: 2,  // Title: 0=course info, 1=+"From a Street Name"+left, 2=+"to a Catastrophe"+right
     2: 3,  // Toponymy: 0=title, 1=+p1+left, 2=+p2+right(Perrault), 3=+p3+typewriter
     3: 3,  // First Caserne: 0=center p1, 1=+chief+helmet, 2=+p2+greatfire, 3=+p3+photo
-    4: 3,  // Neighbourhood: 0=title, 1=+atlases+left1890, 2=+1890text, 3=+surrounded+right1912
+    4: 3,  // Neighbourhood: 0=title, 1=+atlases+left1890, 2=+1890text+right1912, 3=+surrounded
     5: 3,  // Grey Nuns: 0=title, 1=+motherhouse+left, 2=+1918+right, 3=+170infants
     6: 3,  // Valentine's: 0=title, 1=+firetext+right7:50, 2=+curtain+right7:51, 3=+eighteen+leftfire+right8:07+10:30
     7: 3,  // Into flames: 0=title, 1=+marin+rightwagon, 2=+nuns+leftengine, 3=+gust+quote
