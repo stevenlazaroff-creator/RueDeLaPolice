@@ -24,7 +24,7 @@
     8: 2,  // Deaths: 0=center all, 1=+left, 2=+right
     9: 3,  // Arson: 0=title+newspapers, 1=+arson, 2=+berthe+bothimages, 3=+hername
     10: 2, // Second Caserne: 0=center(text+video), 1=+right(Houde), 2=+left(moving)
-    11: 3, // Today: 0=title, 1=+1445+left(Station 10 Cohen-Rose), 2=+plaque text+right(plaque), 3=+artdeco+right(caserne_10 SIM)
+    11: 3, // Today: 0=title, 1=+1445+left(Station 10 Cohen-Rose), 2=+plaque text+right(plaque), 3=+artdeco+right(Autopompe 210 video)
     12: 3  // Remembers: 0=title, 1=+remembers+leftphoto, 2=+follow+rightRueDeLaPolice, 3=+fossil
   };
 
